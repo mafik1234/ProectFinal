@@ -10,10 +10,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/json")
-public class ApiJersey {
+import com.google.gson.Gson;
 
-	private String workerColection;
+@Path("/resurces")
+public class ApiJersey {
+	static Gson gson = new Gson();
+	
 
 	@GET
 	@Path("/get")
@@ -22,11 +24,23 @@ public class ApiJersey {
 
 		String s="{\"nodeId\":\"lalala\"}";
 		try {
-			workerColection = new String(Files.readAllBytes(Paths.get("col0.txt")));
+		String	workerColection = new String(Files.readAllBytes(Paths.get("col0.txt")));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
+
+	}
+	@GET
+	@Path("/workers/get")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getWorkers() {
+
+		MongoDB md= new MongoDB();
+		
+		String workerColection = gson.toJson(md.getFromDB("workers"));
+	
 		return workerColection;
 
 	}
