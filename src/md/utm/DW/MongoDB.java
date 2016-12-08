@@ -16,7 +16,7 @@ import com.mongodb.util.JSON;
 import collections.Worker;
 
 public class MongoDB {
-	MongoDB() {
+	public MongoDB() {
 		db = connectToDB("tes3");
 	}
 

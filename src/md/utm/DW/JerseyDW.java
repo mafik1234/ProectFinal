@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import com.google.gson.Gson;
 
 @Path("/resurces")
-public class ApiJersey {
+public class JerseyDW {
 	static Gson gson = new Gson();
 	
 
