@@ -22,7 +22,7 @@ import md.utm.DW.MongoDB;
 @Path("/resurces")
 public class JerseyProxy {
 	static Gson gson = new Gson();
-	
+	int port=6003+balancing();
 
 	@GET
 	@Path("/get")
@@ -45,7 +45,7 @@ public class JerseyProxy {
 	public String getWorkers() {
 
 		Client client = Client.create();
-int port=6003+balancing();
+
 		WebResource webResource = client
 		   .resource("http://localhost:"+port+"/resurces/workers/get");
 

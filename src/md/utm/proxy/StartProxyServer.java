@@ -26,14 +26,12 @@ public class StartProxyServer {
 				e.printStackTrace();
 			}
 	        System.out.println(String.format("\nJersey Application Server started with WADL available at " + "%sapplication.wadl\n", getCrunchifyURI()));
-	        System.out.println("Started Crunchify's Embedded Jersey HTTPServer Successfully !!!");
+	        System.out.println("Started Proxy Server Successfully !!!");
 	    }
 	 
 	        private static HttpServer createHttpServer() throws IOException {
 	        ResourceConfig crunchifyResourceConfig = new PackagesResourceConfig("md.utm.proxy");
-	        // This tutorial required and then enable below line: http://crunchify.me/1VIwInK
-	        //crunchifyResourceConfig.getContainerResponseFilters().add(CrunchifyCORSFilter.class);
-	        return HttpServerFactory.create(getCrunchifyURI(), crunchifyResourceConfig);
+		        return HttpServerFactory.create(getCrunchifyURI(), crunchifyResourceConfig);
 	    }
 	 
 	    private static URI getCrunchifyURI() {
