@@ -1,6 +1,5 @@
 package md.utm.proxy;
 
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,16 +21,16 @@ import md.utm.DW.MongoDB;
 @Path("/resurces")
 public class JerseyProxy {
 	static Gson gson = new Gson();
-	int port=6003+balancing();
+	int port = 6003 + balancing();
 
 	@GET
 	@Path("/get")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getTrackInJSON() {
 
-		String s="{\"nodeId\":\"lalala\"}";
+		String s = "{\"nodeId\":\"lalala\"}";
 		try {
-		String	workerColection = new String(Files.readAllBytes(Paths.get("col0.txt")));
+			String workerColection = new String(Files.readAllBytes(Paths.get("col0.txt")));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,6 +38,7 @@ public class JerseyProxy {
 		return "fsdfgsdfsf";
 
 	}
+
 	@GET
 	@Path("/workers/get")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -46,34 +46,33 @@ public class JerseyProxy {
 
 		Client client = Client.create();
 
-		WebResource webResource = client
-		   .resource("http://localhost:"+port+"/resurces/workers/get");
+		WebResource webResource = client.resource("http://localhost:" + port + "/resurces/workers/get");
 
-		ClientResponse response = webResource.accept("application/json")
-                   .get(ClientResponse.class);
+		ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 
 		if (response.getStatus() != 200) {
-		   throw new RuntimeException("Failed : HTTP error code : "
-			+ response.getStatus());
+			throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
 		}
 
 		String output = response.getEntity(String.class);
 
 		System.out.println("Output from Server .... \n");
 		System.out.println(output);
-	
-/*MongoDB md= new MongoDB();
-		
-		String workerColection = gson.toJson(md.getFromDB("workers"));*/
-	
+
+		/*
+		 * MongoDB md= new MongoDB();
+		 * 
+		 * String workerColection = gson.toJson(md.getFromDB("workers"));
+		 */
+
 		return output;
 
 	}
-	public int balancing()
-	{
+
+	public int balancing() {
 		Random randomGenerator = new Random();
 		int randomInt = randomGenerator.nextInt(2);
 		return randomInt;
-	
+
 	}
 }

@@ -17,7 +17,7 @@ import collections.Worker;
 
 public class MongoDB {
 	public MongoDB() {
-		db = connectToDB("tes3");
+		db = connectToDB("tes4");
 	}
 
 	public static DB db;
@@ -50,21 +50,27 @@ public class MongoDB {
 		return null;
 	}
 
-	public  void insertToDB(String collName, Worker wk) {
+	public  boolean insertToDB(String collName, Worker wk) {
 
 		DBCollection coll = db.createCollection(collName, null);
 
 		String json = gson.toJson(wk);
 
 		DBObject dbObject = (DBObject) JSON.parse(json);
-
+try{
 		coll.insert(dbObject);
-
 		System.out.println("Document inserted successfully");
+		return true;
+}
+catch(Exception e)
+{
+	return false;
+}
+		
 	}
 
 	public  ArrayList<Worker> getFromDB(String collName) {
-		db = connectToDB("tes3");
+		//db = connectToDB("tes4");
 		ArrayList<Worker> workerList = new ArrayList<Worker>();
 
 		DBCollection coll = db.getCollection(collName);

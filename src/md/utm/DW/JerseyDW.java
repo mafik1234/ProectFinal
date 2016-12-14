@@ -1,16 +1,17 @@
 package md.utm.DW;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
+
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -18,53 +19,71 @@ import com.google.gson.Gson;
 
 
 import collections.Worker;
+import tools.Command;
+
 
 @Path("/resurces")
 public class JerseyDW {
 	static Gson gson = new Gson();
-
+	Command cmd= new Command();
 	MongoDB md= new MongoDB();
+//	ArrayList<Worker> listWorkers = md.getFromDB("workers");
 
-	@GET
-	@Path("/get")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String getTrackInJSON(@PathParam("username") String userName) {
-
-		String s="{\"nodeId\":\"lalala\"}";
-		try {
-		String	workerColection = new String(Files.readAllBytes(Paths.get("col0.txt")));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-
-	}
+	
 	@GET
 	@Path("/workers/get")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getWorkers() {
-
-
+	public Response getWorkers() {
 		
-		String workerColection = gson.toJson(md.getFromDB("workers"));
+	String workerColection = gson.toJson(md.getFromDB("workers"));
 	
-		return workerColection;
+		return Response.status(200).entity(workerColection).build(); 
 
 	}
+	@GET
+	@Path("/workers/get/filter")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response filterWorkers(@QueryParam("salary") int salary) {
+		
+		//System.out.println("filter"+salary+listWorkers.toString());
+	
+		
+	 String workerColection = gson.toJson(cmd.filter(salary,md.getFromDB("workers")));
+		return Response.status(200).entity(workerColection).build(); 
+
+	}
+	
+	@GET
+	@Path("/workers/get/sort")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response sortWorkers() {
+		
+		//System.out.println("filter"+salary+listWorkers.toString());
+	
+		
+	 String workerColection = gson.toJson(cmd.sort(md.getFromDB("workers")));
+		return Response.status(200).entity(workerColection).build(); 
+
+	}
+	
+	
+
+	
 	@POST
 	@Path("/workers/post")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response   putWorkers(@FormParam("name") String name, @FormParam("surename") String surename, @FormParam("salary") int salary ) {
+	public Response   postWorkers( @FormParam("surename") String surename, @FormParam("name") String name, @FormParam("salary") int salary ) {
 
 	
 		Worker wk = new Worker(name, surename, salary);
-		md.insertToDB("workers", wk);
-		String workerColection = gson.toJson(md.getFromDB("workers"));
-		System.out.println("put");
+		boolean status = md.insertToDB("workers", wk);
+	
 		
-		
-		return Response.status(202).entity("Employee deleted successfully !!").build();
-		
+		if (status){
+			return Response.status(201).entity("Employee Post successfully !!").build();
+		}else return Response.status(204).entity("Employee Post unsuccessfully !!").build();
+				
 	}
+	
+	
 }
