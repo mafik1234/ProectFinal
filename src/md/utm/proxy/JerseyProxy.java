@@ -4,6 +4,7 @@ package md.utm.proxy;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Random;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -44,9 +45,9 @@ public class JerseyProxy {
 	public String getWorkers() {
 
 		Client client = Client.create();
-
+int port=6003+balancing();
 		WebResource webResource = client
-		   .resource("http://localhost:6003/resurces/workers/get");
+		   .resource("http://localhost:"+port+"/resurces/workers/get");
 
 		ClientResponse response = webResource.accept("application/json")
                    .get(ClientResponse.class);
@@ -67,5 +68,12 @@ public class JerseyProxy {
 	
 		return output;
 
+	}
+	public int balancing()
+	{
+		Random randomGenerator = new Random();
+		int randomInt = randomGenerator.nextInt(2);
+		return randomInt;
+	
 	}
 }
