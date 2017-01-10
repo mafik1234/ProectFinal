@@ -26,7 +26,7 @@ public class DataWhereHouseService extends Thread{
 	
 	public void run() {
 
-		 System.out.println("Starting Crunchify's Embedded Jersey HTTPServer...\n");
+		 System.out.println("Starting Crunchify's Embedded Jersey HTTPServer... PORT "+port+" \n");
 	     try{ 
 		 HttpServer crunchifyHTTPServer = createHttpServer();
 	        crunchifyHTTPServer.start();
@@ -40,8 +40,6 @@ public class DataWhereHouseService extends Thread{
 	 
 	        private static HttpServer createHttpServer() throws IOException {
 	        ResourceConfig crunchifyResourceConfig = new PackagesResourceConfig("md.utm.DW");
-	        // This tutorial required and then enable below line: http://crunchify.me/1VIwInK
-	        //crunchifyResourceConfig.getContainerResponseFilters().add(CrunchifyCORSFilter.class);
 	        return HttpServerFactory.create(getCrunchifyURI(), crunchifyResourceConfig);
 	    }
 	 
@@ -58,7 +56,8 @@ public class DataWhereHouseService extends Thread{
 	        }
 	        return hostName;
 	    }
-		public void populateData() throws IOException {
+	
+	    public void populateData() throws IOException {
 
 			
 			workerColection = new String(Files.readAllBytes(Paths.get("col0.txt")));

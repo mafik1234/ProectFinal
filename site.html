@@ -1,7 +1,23 @@
 <!DOCTYPE html>
 <html>
 <body>
+<H1>PROXY</H1>
 
+
+<form action="http://localhost:6005/resurces/workers/get" method="get">
+  <br>
+  <input type="submit" value="get">
+</form> 
+<br>
+<form action="http://localhost:6005/resurces/workers/get/filter" method="get">
+  <br>
+   Salary:<br>
+  <input type="number" name="salary" value=100>
+  <br>
+  <input type="submit" value="Filter">
+</form> 
+ <br> <br>
+------------------------------------
 <form action="http://localhost:6003/resurces/workers/post" method="post">
  Surname:<br>
   <input type="text" name="surename" id="surename" value="greg">

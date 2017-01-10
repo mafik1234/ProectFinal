@@ -35,7 +35,7 @@ public class StartProxyServer {
 	    }
 	 
 	    private static URI getCrunchifyURI() {
-	        return UriBuilder.fromUri("http://" + crunchifyGetHostName() + "/").port(6004).build();
+	        return UriBuilder.fromUri("http://" + crunchifyGetHostName() + "/").port(6005).build();
 	    }
 	 
 	    private static String crunchifyGetHostName() {
