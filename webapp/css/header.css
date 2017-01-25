@@ -1,0 +1,59 @@
+#header{
+	padding: 0;
+}
+
+#ticket-system{
+	font-weight: bold;
+	font-family: "Varela Round" !important;
+}
+
+/*========== Menu style =============*/
+#nav-menu {
+	height: 50px;
+}
+#nav-menu ul li {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#nav-menu ul li {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#nav-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border-top: 2px solid #000;
+    border-bottom: 1px dashed #000;
+    position: relative;
+    height: 100%;
+}
+
+#nav-menu li {
+    float: left;
+    border-right: 2px solid #000;
+}
+
+#nav-menu li:last-child {
+    border-right: none;
+}
+
+#nav-menu li a {
+    display: block;
+    color: blue;
+    text-align: center;
+    padding: 5px 20px 5px 5px;;
+    text-decoration: none;
+}
+
+#nav-menu li a:hover:not(.active) {
+    background-color: yellow;
+    opacity: 0.5;
+}
+
+.active {
+    background-color: yellow;
+    opacity: 0.5;
+}
+/*========== End menu =============*/

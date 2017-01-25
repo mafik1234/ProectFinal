@@ -1,0 +1,43 @@
+
+
+/* page styles */
+body { font: 14px/1.5 "Roboto", "Arial", sans-serif; color: #3d3d3d; background-color: #EAEAEA; }
+
+/* note for css font syntax: 
+ * font: [font-style||font-variant||font-weight] font-size [/line-height] font-family | inherit 
+**/
+/* for clean <ul> <li>
+ * ul { list-style-type:none; list-style-position: outside; margin:0; padding:0; }
+ * ul li { display:inline-block; margin:0; padding:0; }
+**/
+
+ul li { background: none; list-style-type: none; margin: 0px; padding: 0px; }
+
+.btn {  background-color: #CCCCB8 !important; background-image: linear-gradient(to bottom, #D7D7C7, #CCCCB8) !important; background-repeat: repeat-x !important; }
+.btn:hover {  background-color: #D7D7C7; background-image: linear-gradient(to bottom, #E2E2D6, #D7D7C7); background-repeat: repeat-x; }
+.btn:focus {  background-color: #D7D7C7; background-image: linear-gradient(to bottom, #E2E2D6, #D7D7C7); background-repeat: repeat-x; }
+.btn:active {  background-color: #D7D7C7; background-image: linear-gradient(to bottom, #E2E2D6, #D7D7C7); background-repeat: repeat-x; }
+
+.top { overflow: hidden; padding: 5px 0px; background-color: #EDEDE5; } 
+.top h3 { text-align: left; font-size: 28px; font-weight: normal; margin: 0px; float: left; color: #34495e; }
+.top ul { float: right; }
+.top ul li a { border: none; }
+.top ul li a:hover { border: none; }
+
+.menu { overflow: hidden; width: 100%; padding: 10px 0px; background-color: #E2E2D6; border-top: 1px solid #3d3d3d; box-shadow: 0px 4px 4px -4px #5D5D5D; }
+.menu ul { margin: 0px; padding: 0px; }
+.menu ul li { float: left; background: none; list-style-type: none; margin: 0px 15px 0px 0px; padding: 0px; text-align: center; }
+.menu ul li:last-child { margin-right: 0px; padding: 0px; }
+.menu ul li a { border: none; }
+.menu ul li a:hover { border: none; }
+
+.menu ul li a.home { background: url(i/home.png) center top no-repeat; padding: 8px 16px 8px 16px; text-decoration: none; border: none; }
+.menu ul li a.clients { background: url(i/clients.png) center top no-repeat; padding: 8px 16px 8px 16px; text-decoration: none; border: none; }
+.menu ul li a.charts { background: url(i/charts.png) center top no-repeat; padding: 8px 16px 8px 16px; text-decoration: none; border: none; }
+.menu ul li a.add-cosultation { background: url(i/add-consultation.png) center top no-repeat; padding: 8px 16px 8px 16px; text-decoration: none; border: none; }
+.menu ul li a.add-client { background: url(i/add-client.png) center top no-repeat; padding: 8px 16px 8px 16px; text-decoration: none; border: none; }
+.menu ul li a.add-country-town { background: url(i/add-country-town.png) center top no-repeat; padding: 8px 16px 8px 16px; text-decoration: none; border: none; }
+.menu ul li a.user { margin-right: 133px; background: url(i/user.png) center top no-repeat; padding: 8px 16px 8px 16px; text-decoration: none; border: none; }
+.menu ul li a.logout { margin-right: 0px; margin-left: 159px; background: url(i/logout.png) center top no-repeat; padding: 8px 16px 8px 16px; text-decoration: none; border: none; }
+.menu ul li.money { margin-right: 19px; margin-left: 10px; font-size: 18px; border-bottom: 1px dashed #aeaeae; margin-top: -7px; }
+

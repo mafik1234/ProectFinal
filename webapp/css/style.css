@@ -1,0 +1,263 @@
+/* A Free Design by Bryant Smith (bryantsmith.com) */
+body {
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	font-family: "Varela Round";
+	font-size: 14px;
+	color: #061C37;
+	background-color: #EFEFEF !important;
+}
+
+* {
+	margin: 0 auto 0 auto;
+	text-align: left;
+}
+
+.margin-top-menu{
+	margin-top: 108px;
+}
+
+#container {
+	display: block;
+	height: auto;
+	position: relative;
+	width: 940px;
+}
+
+#mainpic h1 {
+	position: absolute;
+	text-align: right;
+	font-size: 30px;
+	color: #ffffff;
+	left: 600px;
+	top: 220px;
+}
+
+#mainpic h2 {
+	position: absolute;
+	text-align: right;
+	color: #ffffff;
+	left: 600px;
+	top: 252px;
+}
+
+#mainpic {
+	background-image: url(../images/main.jpg);
+	background-repeat: no-repeat;
+	width: 900px;
+	height: 354px;
+}
+
+.lighter {
+	color: #F2D76A;
+}
+
+#menu {
+	background-image: url(../images/menu.png);
+	background-repeat: no-repeat;
+	width: 1090px;
+	height: 69px;
+	float: left;
+	clear: both;
+}
+
+#content {
+	width: 880px;
+	height: auto;
+	background-color: #FFF;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+}
+
+#footer {
+	bottom: 0;
+    height: 50px;
+    position: fixed;
+    width: 100%;
+}
+
+#footer p{
+	color: grey;
+    font-size: 16px;
+    margin: 15px 0;
+    text-align: center;
+}
+
+#menu ul {
+	list-style: none;
+	padding: 0px;
+	margin-left: auto;
+	width: 1100px;
+}
+
+#menu li {
+	list-style: none;
+	padding: 0px;
+	display: inline;
+}
+
+#menu a,#menu a:visited {
+	float: left;
+	width: 130px;
+	height: 40px;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: #3C3504;
+	font-weight: bold;
+	padding-top: 16px;
+	font-size: 17px;
+}
+
+#menu a:hover {
+	color: #B39311;
+}
+
+#content p {
+	
+}
+
+html,body {
+	text-align: center;
+}
+
+p {
+	text-align: left;
+}
+
+ul#bodyProj {
+    padding: 0;
+    list-style-type:none;
+ 
+}
+
+ul#bodyProj li {
+    display: inblock;
+    padding: 10px 10px;
+ 
+    
+}
+
+ul#bodyProj li a {
+    padding: 10px 20px;
+   
+}
+
+ul#bodyProj li a.btn {
+    width: 115px;
+   
+}
+/*=========BOARD STYLES=========*/
+.board-item {
+	height: 100px;
+	border: 2px solid #000;
+	background-color: #123B8D;
+	margin: 15px 0;
+	display: block;
+	color: white;
+	padding: 5px;
+	position: relative;
+	text-decoration: none;
+}
+
+.board-item:hover {
+	background-color: #4662F2;
+	color: white;
+	text-decoration: none !important;
+	
+}
+
+.board-item span {
+	position: absolute;
+	bottom: 0;
+	right: 3px;
+	font-size: 55px;
+	line-height: 55px;
+}
+
+#board-items {
+	padding-top: 5%;
+}
+/*=========END BOARD=========*/
+
+/*========== Messages =============*/
+.contactsListContainer, .messagesContainer{
+   
+    position: absolute;
+    width: 200px;
+    height: 30px;
+}
+
+.messagesContainer {
+	left: 65%;
+	height: 250px;
+	top: -250px;
+	display: none;
+}
+
+.contactsListContainer {
+	left: 83%;
+	top: 0px;
+}
+
+.contactsListScroll, .messagesScroll {
+	position: relative;
+	height: 250px;
+	overflow-y: scroll;
+	background-color: white;
+}
+
+.contactsListScroll {
+	display: none;
+}
+
+.contactsTitle, .contactName {
+	background-color: blue;
+	height: 30px;
+	color: white;
+	padding-top: 2px;
+}
+
+.contactsTitle {
+	padding-left: 5px;
+}
+
+.writeMessages {
+	top: -32px;	
+	position: relative;
+}
+
+#writeMessage {
+	width: 200px;
+	float: left;
+	padding-right: 40px;
+}
+
+#sendMessage {
+	position: relative;
+	width: 45px;
+	right: -156px;
+	top: -32px;'
+	float: left;
+}
+
+.contactsList ul li {
+	text-decoration: none;
+	margin: 0;
+	cursor: pointer;
+	display: table;
+}
+
+.contactsListScroll {
+	background-color: white;
+}
+    
+.closeMessage {
+	position: relative;
+	left: 180px;
+	top: 2px;
+	float:left;
+	cursor: pointer;
+}

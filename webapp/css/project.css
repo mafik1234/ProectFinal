@@ -1,0 +1,65 @@
+#rcorners5 {
+    border-radius: 15px 50px 30px;
+    background-image:url("../images/projects-background.jpg");
+
+    padding: 20px; 
+    width: 70%;
+    height: 150px; 
+}
+
+#description {
+   float: left;
+    padding: 5px; 
+    width: 60%;
+    height: auto; 
+}
+#imag{
+   float: left;
+    padding: 5px; 
+    width: 150px;
+    height: 150px; 
+}
+#editProj{
+	  float: right;
+	    width: auto;
+    height: auto; 
+}
+#bodyObject {
+     border-radius: 15px 50px 30px;
+    background-image:url("../images/projects-background.jpg");
+float:left;
+    padding: 20px; 
+    width: 80%;
+    height: auto;
+   display: inblock;
+    clear:both;
+}
+
+
+
+#menuProj ul {
+    padding: 0;
+}
+
+#menuProj ul li {
+    display: inline;
+}
+
+#menuProj ul li a {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px 4px 0 0;
+}
+
+#menuProj ul li a:hover {
+    background-color: orange;
+}
+#menuProj{
+	/* float :left; */
+}
+
+.bodyProject {
+	display: flex;
+}
