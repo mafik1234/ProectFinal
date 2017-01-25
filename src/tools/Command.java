@@ -31,5 +31,14 @@ return listWorkers;
 
 }
 
+public ArrayList<Worker> sortDesc(ArrayList<Worker>listWorkers) {
 
+listWorkers = (ArrayList<Worker>) listWorkers.stream()
+		.sorted((Worker e1, Worker e2) -> Integer.compare(e2.salary, e1.salary)).collect(Collectors.toList());
+
+
+
+return listWorkers;
+
+}
 }
