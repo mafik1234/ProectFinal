@@ -153,7 +153,28 @@ String output= jedis.get(path);
 		return output;
 
 	}
+ @GET
+ @Path("/workers/get/sort/asc/json")
+ @Produces(MediaType.APPLICATION_JSON)
+ public String sortWorkersAscJson() throws IOException {
+  String path="/resurces/workers/get/sort/asc";
+String output= jedis.get(path);
 
+  if (output==null){
+   output=getResurceFromDW(path);
+   System.out.println("Output from Server .... \n");
+   
+  
+   jedis.set(path+"/json", output);
+   jedis.expire(path+"/json", 10);
+  }else System.out.println("Output from Redis .... \n");
+  
+  
+  
+  System.out.println(output);
+  return output;
+
+ }
 	
 	@GET
 	@Path("/workers/get/sort/desc/xml")
