@@ -29,12 +29,14 @@ public class MongoDB {
 		
 		getFromDB("workers");*/
 	MongoDB md= new MongoDB();
-	db = md.connectToDB("tes3");
-	Worker wk = new Worker("greg", "bro", 1000);
-	md.insertToDB("workers", wk);
-		String workerColection = gson.toJson(md.getFromDB("workers"));
+	db = md.connectToDB("tes4");
+	Worker wk = new Worker("bri", "go", 100);
+	md.insertToDB("workers1", wk);
+		String workerColection = gson.toJson(md.getFromDB("workers3"));
 		
-		System.out.println(workerColection);
+		System.out.println(md.getFromDB("workers1"));
+		
+		//System.out.println(workerColection);
 
 	}
 
@@ -83,7 +85,7 @@ catch(Exception e)
 			DBObject dbObj = cursor.next();
 
 			String name = (String) dbObj.get("name");
-			String surname = (String) dbObj.get("name");
+			String surname = (String) dbObj.get("surname");
 			//int salary = Integer.parseInt((String)dbObj.get("salary"));
 			int salary =(Integer)dbObj.get("salary");
 			

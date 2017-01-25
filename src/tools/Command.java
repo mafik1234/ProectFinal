@@ -20,7 +20,7 @@ public ArrayList<Worker> filter(int salary,ArrayList<Worker>listWorkers ) {
 
 
 
-public ArrayList<Worker> sort(ArrayList<Worker>listWorkers) {
+public ArrayList<Worker> sortAsc(ArrayList<Worker>listWorkers) {
 
 listWorkers = (ArrayList<Worker>) listWorkers.stream()
 		.sorted((Worker e1, Worker e2) -> Integer.compare(e1.salary, e2.salary)).collect(Collectors.toList());
@@ -30,4 +30,6 @@ listWorkers = (ArrayList<Worker>) listWorkers.stream()
 return listWorkers;
 
 }
+
+
 }

@@ -3,6 +3,8 @@ package md.utm.proxy;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.ws.rs.GET;
@@ -15,32 +17,38 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 import md.utm.DW.MongoDB;
 import redis.clients.jedis.Jedis;
-
+import tools.XstreamTool;
+import collections.Worker;
+import collections.WorkerList;
 @Path("/resurces")
 public class JerseyProxy {
 	static Gson gson = new Gson();
-	int port = 6003;
+	int port = 7002;
 	Jedis jedis = new Jedis("localhost");
-
+	XstreamTool xs= new XstreamTool();
 	
 	
 
 
 	@GET
-	@Path("/workers/get")
+	@Path("/workers/get/json")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getWorkers() {
-		String output= jedis.get("/resurces/workers/get");
+	public String getWorkersJson() {
+		String path="/resurces/workers/get";
+		String output= jedis.get(path);
 		
 		if (output==null){
-			output=getResurceFromDW("/resurces/workers/get");
+			output=getResurceFromDW(path);
 			System.out.println("Output from Server .... \n");
+			jedis.set(path, output);
+			jedis.expire(path, 10);
 		}else System.out.println("Output from Redis .... \n");
 		
 		System.out.println(output);
@@ -51,51 +59,155 @@ public class JerseyProxy {
 	}
 	
 	@GET
-	@Path("/workers/get/filter")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String filterWorkers(@QueryParam("salary") int salary) {
-
-String output= jedis.get("/resurces/workers/get/filter/"+salary);
+	@Path("/workers/get/xml")
+	@Produces(MediaType.APPLICATION_XML)
+	public String getWorkersXml() throws IOException {
+		
+	
+		String pathXml="/resurces/workers/get/xml";
+		String path="/resurces/workers/get";
+		
+		String output= jedis.get(pathXml);
 		
 		if (output==null){
-			output=getResurceFromDW("/resurces/workers/get/filter","salary",""+salary);
+			output=getResurceFromDW(path);
 			System.out.println("Output from Server .... \n");
+			output=xs.listToXml(jsonToList(output));	
+			jedis.set(pathXml, output);
+			jedis.expire(pathXml, 10);
+		}else System.out.println("Output from Redis .... \n");
+		
+		System.out.println(output);
+
+	
+		return output;
+
+	}
+	
+	
+	
+	@GET
+	@Path("/workers/get/filter/json")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String filterWorkersJson(@QueryParam("salary") int salary) throws IOException {
+		String path="/resurces/workers/get/filter";
+String output= jedis.get(path+salary);
+		
+		if (output==null){
+			output=getResurceFromDW(path,"salary",""+salary);
+			System.out.println("Output from Server .... \n");
+			
+			jedis.set(path+"/"+salary, output);
+			jedis.expire(path+"/"+salary, 10);
 		}else System.out.println("Output from Redis .... \n");
 		
 		System.out.println(output);
 		return output;
 	}
+	
+	
+	@GET
+	@Path("/workers/get/filter/xml")
+	@Produces(MediaType.APPLICATION_XML)
+	public String filterWorkersXml(@QueryParam("salary") int salary) throws IOException {
+		String path="/resurces/workers/get/filter";
+		String pathXml="/resurces/workers/get/filter/xml/"+salary;
+String output= jedis.get(path+salary);
+		
+		if (output==null){
+			output=getResurceFromDW(path,"salary",""+salary);
+			System.out.println("Output from Server .... \n");
+			output=xs.listToXml(jsonToList(output));
+			jedis.set(pathXml, output);
+			jedis.expire(pathXml, 10);
+		}else System.out.println("Output from Redis .... \n");
+		
+		System.out.println(output);
+		return output;
+	}
+	
+	
+	
+	
+	
+	
+	@GET
+	@Path("/workers/get/sort/asc/xml")
+	@Produces(MediaType.APPLICATION_XML)
+	public String sortWorkersAsc() throws IOException {
+		String path="/resurces/workers/get/sort/asc";
+String output= jedis.get(path);
+
+		if (output==null){
+			output=getResurceFromDW(path);
+			System.out.println("Output from Server .... \n");
+			
+			output=xs.listToXml(jsonToList(output));
+			jedis.set(path, output);
+			jedis.expire(path, 10);
+		}else System.out.println("Output from Redis .... \n");
+		
+		
+		
+		System.out.println(output);
+		return output;
+
+	}
+
+	
+	@GET
+	@Path("/workers/get/sort/desc/xml")
+	@Produces(MediaType.APPLICATION_XML)
+	public String sortWorkersDesc() throws IOException {
+		String path="/resurces/workers/get/sort/desc";
+String output= jedis.get(path);
+		
+		if (output==null){
+			output=getResurceFromDW(path);
+			System.out.println("Output from Server .... \n");
+			output=xs.listToXml(jsonToList(output));
+			jedis.set(path, output);
+			jedis.expire(path, 10);
+		}else System.out.println("Output from Redis .... \n");
+		
+	
+		
+		System.out.println(output);
+		return output;
+
+	}
+	
+	
+	
 	
 public String getResurceFromDW(String path,String paramName,String param)
 {
-	port = 6003 + balancing();
+	int thisport = port + balancing();
 	String output;
 	Client client = Client.create();
-	WebResource webResource = client.resource("http://localhost:" + port +path);
+	WebResource webResource = client.resource("http://localhost:" + thisport +path);
 	ClientResponse response = webResource.queryParam(paramName, param).accept("application/json").get(ClientResponse.class);
 	if (response.getStatus() != 200) {
 		throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
 	}
 
 	 output = response.getEntity(String.class);
-		jedis.set(path+"/"+param, output);
-		jedis.expire(path+"/"+param, 10);
+		
 	return output;
 }
 public String getResurceFromDW(String path)
 {
-	//port = 6003 + balancing();
+	int thisport = port + balancing();
 	String output;
 	Client client = Client.create();
-	WebResource webResource = client.resource("http://localhost:" + port + path);
+	WebResource webResource = client.resource("http://localhost:" + thisport + path);
 	ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 	if (response.getStatus() != 200) {
 		throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
 	}
 
 	 output = response.getEntity(String.class);
-		jedis.set(path, output);
-		jedis.expire(path, 10);
+		
 	return output;
 }
 	public int balancing() {
@@ -105,4 +217,15 @@ public String getResurceFromDW(String path)
 		return randomInt;
 
 	}
+	
+	public ArrayList<Worker> jsonToList(String json) {
+		java.lang.reflect.Type type = new TypeToken<List<Worker>>() {
+		}.getType();
+
+		ArrayList<Worker> workers = gson.fromJson(json, (java.lang.reflect.Type) type);
+
+		return workers;
+
+	}
 }
+

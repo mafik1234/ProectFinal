@@ -18,8 +18,7 @@ import com.sun.net.httpserver.HttpServer;
 
 
 public class DataWhereHouseService extends Thread{
-	static int port;
-	private String workerColection;
+ int port=0;
 	DataWhereHouseService(int port){
 		this.port=port;
 	}
@@ -28,22 +27,22 @@ public class DataWhereHouseService extends Thread{
 
 		 System.out.println("Starting Crunchify's Embedded Jersey HTTPServer... PORT "+port+" \n");
 	     try{ 
-		 HttpServer crunchifyHTTPServer = createHttpServer();
+		 HttpServer crunchifyHTTPServer = createHttpServer(port);
 	        crunchifyHTTPServer.start();
 	     }catch (IOException e) {
 
 				e.printStackTrace();
 			}
-	        System.out.println(String.format("\nJersey Application Server started with WADL available at " + "%sapplication.wadl\n", getCrunchifyURI()));
-	        System.out.println("Started Crunchify's Embedded Jersey HTTPServer Successfully !!!");
+	        System.out.println(String.format("\nJersey Application Server started with WADL available at " + "%sapplication.wadl\n", getCrunchifyURI(port)));
+	        System.out.println("Started Jersey HTTPServer Successfully !!!");
 	    }
 	 
-	        private static HttpServer createHttpServer() throws IOException {
+	        private static HttpServer createHttpServer(int port) throws IOException {
 	        ResourceConfig crunchifyResourceConfig = new PackagesResourceConfig("md.utm.DW");
-	        return HttpServerFactory.create(getCrunchifyURI(), crunchifyResourceConfig);
+	        return HttpServerFactory.create(getCrunchifyURI(port), crunchifyResourceConfig);
 	    }
 	 
-	    private static URI getCrunchifyURI() {
+	    private static URI getCrunchifyURI(int port) {
 	        return UriBuilder.fromUri("http://" + crunchifyGetHostName() + "/").port(port).build();
 	    }
 	 
@@ -57,11 +56,6 @@ public class DataWhereHouseService extends Thread{
 	        return hostName;
 	    }
 	
-	    public void populateData() throws IOException {
-
-			
-			workerColection = new String(Files.readAllBytes(Paths.get("col0.txt")));
-
-		}
+	  
 	
 }

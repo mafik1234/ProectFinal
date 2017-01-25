@@ -50,13 +50,24 @@ public class JerseyDW {
 	}
 
 	@GET
-	@Path("/workers/get/sort")
+	@Path("workers/get/sort/asc")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response sortWorkers() {
+	public Response sortWorkersAsc() {
 
 		// System.out.println("filter"+salary+listWorkers.toString());
 
-		String workerColection = gson.toJson(cmd.sort(md.getFromDB("workers")));
+		String workerColection = gson.toJson(cmd.sortAsc(md.getFromDB("workers")));
+		return Response.status(200).entity(workerColection).build();
+
+	}
+	@GET
+	@Path("/workers/get/sort/desc")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response sortWorkersDesc() {
+
+		// System.out.println("filter"+salary+listWorkers.toString());
+
+		String workerColection = gson.toJson(cmd.sortDesc(md.getFromDB("workers")));
 		return Response.status(200).entity(workerColection).build();
 
 	}
