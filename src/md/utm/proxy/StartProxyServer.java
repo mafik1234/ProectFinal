@@ -17,7 +17,7 @@ import com.sun.net.httpserver.HttpServer;
 public class StartProxyServer {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		 System.out.println("Starting Crunchify's Embedded Jersey HTTPServer...\n");
+		 System.out.println("Starting Jersey HTTPServer...\n");
 	     try{ 
 		 HttpServer crunchifyHTTPServer = createHttpServer();
 	        crunchifyHTTPServer.start();
@@ -25,7 +25,7 @@ public class StartProxyServer {
 
 				e.printStackTrace();
 			}
-	        System.out.println(String.format("\nJersey Application Server started with WADL available at " + "%sapplication.wadl\n", getCrunchifyURI()));
+	        System.out.println(String.format("\nJersey Application Server  at " + "%sapplication.wadl\n", getCrunchifyURI()));
 	        System.out.println("Started Proxy Server Successfully !!!");
 	    }
 	 

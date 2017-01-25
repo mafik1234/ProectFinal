@@ -25,7 +25,7 @@ public class DataWhereHouseService extends Thread{
 	
 	public void run() {
 
-		 System.out.println("Starting Crunchify's Embedded Jersey HTTPServer... PORT "+port+" \n");
+		 System.out.println("Starting  Jersey HTTPServer... PORT "+port+" \n");
 	     try{ 
 		 HttpServer crunchifyHTTPServer = createHttpServer(port);
 	        crunchifyHTTPServer.start();
